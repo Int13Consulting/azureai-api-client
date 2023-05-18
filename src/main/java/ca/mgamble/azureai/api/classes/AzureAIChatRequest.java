@@ -31,17 +31,17 @@ import java.util.ArrayList;
  */
 public class AzureAIChatRequest {
     private ArrayList<AzureAIMessage> messages;
-    private int temperature;
+    private Integer temperature;
     @SerializedName("n")
-    private int choices;
+    private Integer choices;
     private boolean stream;
-    private boolean stop;
+    private String stop;
     @SerializedName("max_tokens")
-    private int maxTokens;
+    private Integer maxTokens;
     @SerializedName("presence_penalty")
-    private int presencePenalty;
+    private Integer presencePenalty;
     @SerializedName("frequency_penalty")
-    private int frequencyPenalty;
+    private Integer frequencyPenalty;
     private String user;
 
     /**
@@ -58,6 +58,12 @@ public class AzureAIChatRequest {
         this.messages = messages;
     }
 
+    public void addMessage(AzureAIMessage message) {
+        if (this.messages == null) {
+            this.messages = new ArrayList<>();
+        }
+        this.messages.add(message);
+    }
     /**
      * @return the temperature
      */
@@ -103,17 +109,24 @@ public class AzureAIChatRequest {
     /**
      * @return the stop
      */
-    public boolean isStop() {
+    public String isStop() {
         return stop;
     }
 
     /**
      * @param stop the stop to set
      */
-    public void setStop(boolean stop) {
+    public void setStop(String stop) {
         this.stop = stop;
     }
 
+    public void setStop(boolean stop) {
+        if (stop) {
+            this.stop = "true";
+        } else {
+            this.stop = "false";
+        }
+    }
     /**
      * @return the maxTokens
      */

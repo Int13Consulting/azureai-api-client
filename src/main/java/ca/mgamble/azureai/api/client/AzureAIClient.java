@@ -24,6 +24,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package ca.mgamble.azureai.api.client;
 
 import ca.mgamble.azureai.api.classes.AzureAIChatRequest;
+import ca.mgamble.azureai.api.classes.AzureAIChatResponse;
 import ca.mgamble.azureai.api.classes.AzureAICompletionRequest;
 import ca.mgamble.azureai.api.classes.AzureAICompletionsResult;
 import ca.mgamble.azureai.api.classes.AzureAICreateEmbedingResponse;
@@ -52,16 +53,17 @@ public class AzureAIClient implements Closeable {
     private final String url;
     private final String token;
     private static final Version version = new Version();
-
+    private final String apiVersion;
     private boolean closed = false;
     Gson gson = new Gson();
 
-    public AzureAIClient(String url, String apiKey, String deploymentName) throws Exception {
+    public AzureAIClient(String url, String apiKey, String deploymentName, String apiVersion) throws Exception {
         this.client = new DefaultAsyncHttpClient();
 
         this.url = url + "/openai/deployments/" + deploymentName + "/";
         this.token = apiKey;
         this.deploymentName = deploymentName;
+        this.apiVersion = apiVersion;
         closeClient = true;
     }
 
@@ -93,7 +95,7 @@ public class AzureAIClient implements Closeable {
 
     public AzureAICompletionsResult getCompletion(AzureAICompletionRequest completion) throws Exception {
         //chat/completions
-        Future<Response> f = client.executeRequest(buildRequest("POST", "/completions", gson.toJson(completion)));
+        Future<Response> f = client.executeRequest(buildRequest("POST", "completions?api-version=" + apiVersion, gson.toJson(completion)));
         Response r = f.get();
         if (r.getStatusCode() != 200) {
 
@@ -105,7 +107,7 @@ public class AzureAIClient implements Closeable {
     }
 
     public AzureAICreateEmbedingResponse createEmbedding(AzureAIEmbedding embedding) throws Exception {
-        Future<Response> f = client.executeRequest(buildRequest("POST", "/embeddings", gson.toJson(embedding)));
+        Future<Response> f = client.executeRequest(buildRequest("POST", "embeddings?api-version=" + apiVersion, gson.toJson(embedding)));
         Response r = f.get();
         if (r.getStatusCode() != 200) {
 
@@ -116,14 +118,14 @@ public class AzureAIClient implements Closeable {
         }
     }
 
-    public AzureAICreateEmbedingResponse createChatRequest(AzureAIChatRequest chatRequest) throws Exception {
-        Future<Response> f = client.executeRequest(buildRequest("POST", "/chat/completions", gson.toJson(chatRequest)));
+    public AzureAIChatResponse sendChatRequest(AzureAIChatRequest chatRequest) throws Exception {
+        Future<Response> f = client.executeRequest(buildRequest("POST", "chat/completions?api-version=" + apiVersion, gson.toJson(chatRequest)));
         Response r = f.get();
         if (r.getStatusCode() != 200) {
 
-            throw new Exception("Could not create embedding");
+            throw new Exception("Could not create chat request - server resposne was " + r.getStatusCode() + " to url: " + url + "chat/completions?api-version=2023-03-15-preview");
         } else {
-            return gson.fromJson(r.getResponseBody(), AzureAICreateEmbedingResponse.class);
+            return gson.fromJson(r.getResponseBody(), AzureAIChatResponse.class);
 
         }
     }
