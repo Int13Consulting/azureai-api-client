@@ -20,50 +20,72 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package ca.mgamble.azureai.api.classes;
+
+
+package ca.int13.azureai.api.classes;
+
 
 import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 
 /**
  *
  * @author mgamble
  */
-public class AzureAIChatRequest {
-    private ArrayList<AzureAIMessage> messages;
-    private Integer temperature;
-    @SerializedName("n")
-    private Integer choices;
-    private boolean stream;
-    private String stop;
+public class AzureAICompletionRequest {
+    private String prompt;
     @SerializedName("max_tokens")
-    private Integer maxTokens;
-    @SerializedName("presence_penalty")
-    private Integer presencePenalty;
-    @SerializedName("frequency_penalty")
-    private Integer frequencyPenalty;
+    private int maxTokens;
+    private int temperature = 1;
+    @SerializedName("top_p")
+    private int topProbibility = 1;
+    @SerializedName("logit_bias")
+    private HashMap<String, Integer> logitBiasMap;
     private String user;
+    @SerializedName("n")
+    private int choices = 1;
+    private boolean stream = false;
+    private String suffix;
+    private boolean echo;
+    private String stop;
+    
+    @SerializedName("presence_penalty")
+    private int presencePenalty = 0;
+    @SerializedName("frequency_penalty")
+    private int frequencyPenalty = 0;
+    @SerializedName("best_of")
+    private int bestOf;
 
     /**
-     * @return the messages
+     * @return the prompt
      */
-    public ArrayList<AzureAIMessage> getMessages() {
-        return messages;
+    public String getPrompt() {
+        return prompt;
     }
 
     /**
-     * @param messages the messages to set
+     * @param prompt the prompt to set
      */
-    public void setMessages(ArrayList<AzureAIMessage> messages) {
-        this.messages = messages;
+    public void setPrompt(String prompt) {
+        this.prompt = prompt;
     }
 
-    public void addMessage(AzureAIMessage message) {
-        if (this.messages == null) {
-            this.messages = new ArrayList<>();
-        }
-        this.messages.add(message);
+    /**
+     * @return the maxTokens
+     */
+    public int getMaxTokens() {
+        return maxTokens;
     }
+
+    /**
+     * @param maxTokens the maxTokens to set
+     */
+    public void setMaxTokens(int maxTokens) {
+        this.maxTokens = maxTokens;
+    }
+
     /**
      * @return the temperature
      */
@@ -76,6 +98,48 @@ public class AzureAIChatRequest {
      */
     public void setTemperature(int temperature) {
         this.temperature = temperature;
+    }
+
+    /**
+     * @return the topProbibility
+     */
+    public int getTopProbibility() {
+        return topProbibility;
+    }
+
+    /**
+     * @param topProbibility the topProbibility to set
+     */
+    public void setTopProbibility(int topProbibility) {
+        this.topProbibility = topProbibility;
+    }
+
+    /**
+     * @return the logitBiasMap
+     */
+    public HashMap<String, Integer> getLogitBiasMap() {
+        return logitBiasMap;
+    }
+
+    /**
+     * @param logitBiasMap the logitBiasMap to set
+     */
+    public void setLogitBiasMap(HashMap<String, Integer> logitBiasMap) {
+        this.logitBiasMap = logitBiasMap;
+    }
+
+    /**
+     * @return the user
+     */
+    public String getUser() {
+        return user;
+    }
+
+    /**
+     * @param user the user to set
+     */
+    public void setUser(String user) {
+        this.user = user;
     }
 
     /**
@@ -107,9 +171,37 @@ public class AzureAIChatRequest {
     }
 
     /**
+     * @return the suffix
+     */
+    public String getSuffix() {
+        return suffix;
+    }
+
+    /**
+     * @param suffix the suffix to set
+     */
+    public void setSuffix(String suffix) {
+        this.suffix = suffix;
+    }
+
+    /**
+     * @return the echo
+     */
+    public boolean isEcho() {
+        return echo;
+    }
+
+    /**
+     * @param echo the echo to set
+     */
+    public void setEcho(boolean echo) {
+        this.echo = echo;
+    }
+
+    /**
      * @return the stop
      */
-    public String isStop() {
+    public String getStop() {
         return stop;
     }
 
@@ -118,27 +210,6 @@ public class AzureAIChatRequest {
      */
     public void setStop(String stop) {
         this.stop = stop;
-    }
-
-    public void setStop(boolean stop) {
-        if (stop) {
-            this.stop = "true";
-        } else {
-            this.stop = "false";
-        }
-    }
-    /**
-     * @return the maxTokens
-     */
-    public int getMaxTokens() {
-        return maxTokens;
-    }
-
-    /**
-     * @param maxTokens the maxTokens to set
-     */
-    public void setMaxTokens(int maxTokens) {
-        this.maxTokens = maxTokens;
     }
 
     /**
@@ -170,16 +241,19 @@ public class AzureAIChatRequest {
     }
 
     /**
-     * @return the user
+     * @return the bestOf
      */
-    public String getUser() {
-        return user;
+    public int getBestOf() {
+        return bestOf;
     }
 
     /**
-     * @param user the user to set
+     * @param bestOf the bestOf to set
      */
-    public void setUser(String user) {
-        this.user = user;
+    public void setBestOf(int bestOf) {
+        this.bestOf = bestOf;
     }
+
+   
+    
 }

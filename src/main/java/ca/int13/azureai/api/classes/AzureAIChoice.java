@@ -20,59 +20,75 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package ca.mgamble.azureai.api.classes;
+package ca.int13.azureai.api.classes;
 
-import java.util.ArrayList;
+import com.google.gson.annotations.SerializedName;
 
 /**
  *
  * @author mgamble
  */
-public class AzureAICreateEmbedingResponse {
-    private String object;
-    private String model;
-    private AzureAICreateEmbedingResponseData data;
+public class AzureAIChoice {
+    private AzureAIMessage message;
+    @SerializedName("finish_reason")
+    private String finishReason;
+    @SerializedName("logprobs")
+    private String logprobs;
+    private int index;
 
     /**
-     * @return the object
+     * @return the finishReason
      */
-    public String getObject() {
-        return object;
+    public String getFinishReason() {
+        return finishReason;
     }
 
     /**
-     * @param object the object to set
+     * @param finishReason the finishReason to set
      */
-    public void setObject(String object) {
-        this.object = object;
+    public void setFinishReason(String finishReason) {
+        this.finishReason = finishReason;
     }
 
     /**
-     * @return the model
+     * @return the index
      */
-    public String getModel() {
-        return model;
+    public int getIndex() {
+        return index;
     }
 
     /**
-     * @param model the model to set
+     * @param index the index to set
      */
-    public void setModel(String model) {
-        this.model = model;
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     /**
-     * @return the data
+     * @return the logprobs
      */
-    public AzureAICreateEmbedingResponseData getData() {
-        return data;
+    public String getLogprobs() {
+        return logprobs;
     }
 
     /**
-     * @param data the data to set
+     * @param logprobs the logprobs to set
      */
-    public void setData(AzureAICreateEmbedingResponseData data) {
-        this.data = data;
+    public void setLogprobs(String logprobs) {
+        this.logprobs = logprobs;
     }
-    
+
+    /**
+     * @return the message
+     */
+    public AzureAIMessage getMessage() {
+        return message;
+    }
+
+    /**
+     * @param message the message to set
+     */
+    public void setMessage(AzureAIMessage message) {
+        this.message = message;
+    }
 }

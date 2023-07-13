@@ -20,41 +20,52 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package ca.mgamble.azureai.api.classes;
-
-import com.google.gson.annotations.SerializedName;
+package ca.int13.azureai.api.classes;
 
 /**
  *
  * @author mgamble
  */
-public enum AzureAIRole {
+public class AzureAIMessage {
     
-    @SerializedName("assistant")
-    ASSISTANT("assistant"),
-    @SerializedName("system")
-    SYSTEM("system"), 
-    @SerializedName("user")
-    USER("user"), 
+    private AzureAIRole role;
+    private String content;
+
+
+    public AzureAIMessage() {
+        
+    }
+    public AzureAIMessage(String content, AzureAIRole role) {
+        this.content = content;
+        this.role = role;
+    }
     
-   ;
-    
-    private final String text;
+    /**
+     * @return the role
+     */
+    public AzureAIRole getRole() {
+        return role;
+    }
 
     /**
-     * @param text
+     * @param role the role to set
      */
-    private AzureAIRole(final String text) {
-        this.text = text;
+    public void setRole(AzureAIRole role) {
+        this.role = role;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Enum#toString()
+    /**
+     * @return the content
      */
-    @Override
-    public String toString() {
-        return text;
+    public String getContent() {
+        return content;
     }
 
+    /**
+     * @param content the content to set
+     */
+    public void setContent(String content) {
+        this.content = content;
+    }
     
 }

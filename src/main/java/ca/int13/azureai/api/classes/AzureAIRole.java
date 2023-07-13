@@ -20,7 +20,7 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package ca.mgamble.azureai.api.classes;
+package ca.int13.azureai.api.classes;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -28,67 +28,33 @@ import com.google.gson.annotations.SerializedName;
  *
  * @author mgamble
  */
-public class AzureAIChoice {
-    private String text;
-    @SerializedName("finish_reason")
-    private String finishReason;
-    @SerializedName("logprobs")
-    private String logprobs;
-    private int index;
+public enum AzureAIRole {
+    
+    @SerializedName("assistant")
+    ASSISTANT("assistant"),
+    @SerializedName("system")
+    SYSTEM("system"), 
+    @SerializedName("user")
+    USER("user"), 
+    
+   ;
+    
+    private final String text;
 
     /**
-     * @return the finishReason
+     * @param text
      */
-    public String getFinishReason() {
-        return finishReason;
-    }
-
-    /**
-     * @param finishReason the finishReason to set
-     */
-    public void setFinishReason(String finishReason) {
-        this.finishReason = finishReason;
-    }
-
-    /**
-     * @return the index
-     */
-    public int getIndex() {
-        return index;
-    }
-
-    /**
-     * @param index the index to set
-     */
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    /**
-     * @return the text
-     */
-    public String getText() {
-        return text;
-    }
-
-    /**
-     * @param text the text to set
-     */
-    public void setText(String text) {
+    private AzureAIRole(final String text) {
         this.text = text;
     }
 
-    /**
-     * @return the logprobs
+    /* (non-Javadoc)
+     * @see java.lang.Enum#toString()
      */
-    public String getLogprobs() {
-        return logprobs;
+    @Override
+    public String toString() {
+        return text;
     }
 
-    /**
-     * @param logprobs the logprobs to set
-     */
-    public void setLogprobs(String logprobs) {
-        this.logprobs = logprobs;
-    }
+    
 }

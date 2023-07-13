@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2023 Matthew M. Gamble
+Copyright (c) 2023 Int13 Consulting Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -21,13 +21,14 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package ca.mgamble.azureai.api.client;
+package ca.int13.azureai.api.client;
 
 
 public class Version {
 
     /*
-        
+        0.0.4 - Set sane defaults on AIChatRequest
+        0.0.3 - Fix issues with AzureAIMessage
         0.0.1 - Initial release for testing
 
      */
@@ -35,7 +36,7 @@ public class Version {
 
     }
 
-    private final String buildNumber = "0.0.1";
+    private final String buildNumber = "0.0.4";
     private final String buildName = "Don't Blame Me";
     private final String author = "Matthew M. Gamble";
 

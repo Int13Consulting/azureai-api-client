@@ -20,52 +20,59 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package ca.mgamble.azureai.api.classes;
+package ca.int13.azureai.api.classes;
+
+import java.util.ArrayList;
 
 /**
  *
  * @author mgamble
  */
-public class AzureAIMessage {
-    
-    private AzureAIRole role;
-    private String content;
+public class AzureAICreateEmbedingResponse {
+    private String object;
+    private String model;
+    private AzureAICreateEmbedingResponseData data;
 
-
-    public AzureAIMessage() {
-        
-    }
-    public AzureAIMessage(String content, AzureAIRole role) {
-        this.content = content;
-        this.role = role;
-    }
-    
     /**
-     * @return the role
+     * @return the object
      */
-    public AzureAIRole getRole() {
-        return role;
+    public String getObject() {
+        return object;
     }
 
     /**
-     * @param role the role to set
+     * @param object the object to set
      */
-    public void setRole(AzureAIRole role) {
-        this.role = role;
+    public void setObject(String object) {
+        this.object = object;
     }
 
     /**
-     * @return the content
+     * @return the model
      */
-    public String getContent() {
-        return content;
+    public String getModel() {
+        return model;
     }
 
     /**
-     * @param content the content to set
+     * @param model the model to set
      */
-    public void setContent(String content) {
-        this.content = content;
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    /**
+     * @return the data
+     */
+    public AzureAICreateEmbedingResponseData getData() {
+        return data;
+    }
+
+    /**
+     * @param data the data to set
+     */
+    public void setData(AzureAICreateEmbedingResponseData data) {
+        this.data = data;
     }
     
 }

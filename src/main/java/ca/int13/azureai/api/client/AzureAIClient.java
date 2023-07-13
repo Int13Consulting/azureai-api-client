@@ -21,14 +21,14 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package ca.mgamble.azureai.api.client;
+package ca.int13.azureai.api.client;
 
-import ca.mgamble.azureai.api.classes.AzureAIChatRequest;
-import ca.mgamble.azureai.api.classes.AzureAIChatResponse;
-import ca.mgamble.azureai.api.classes.AzureAICompletionRequest;
-import ca.mgamble.azureai.api.classes.AzureAICompletionsResult;
-import ca.mgamble.azureai.api.classes.AzureAICreateEmbedingResponse;
-import ca.mgamble.azureai.api.classes.AzureAIEmbedding;
+import ca.int13.azureai.api.classes.AzureAIChatRequest;
+import ca.int13.azureai.api.classes.AzureAIChatResponse;
+import ca.int13.azureai.api.classes.AzureAICompletionRequest;
+import ca.int13.azureai.api.classes.AzureAICompletionsResult;
+import ca.int13.azureai.api.classes.AzureAICreateEmbedingResponse;
+import ca.int13.azureai.api.classes.AzureAIEmbedding;
 
 import com.google.gson.Gson;
 import java.io.Closeable;
@@ -125,6 +125,7 @@ public class AzureAIClient implements Closeable {
 
             throw new Exception("Could not create chat request - server resposne was " + r.getStatusCode() + " to url: " + url + "chat/completions?api-version=2023-03-15-preview");
         } else {
+         //   System.out.println(gson.toJson(r.getResponseBody()));
             return gson.fromJson(r.getResponseBody(), AzureAIChatResponse.class);
 
         }
@@ -135,7 +136,7 @@ public class AzureAIClient implements Closeable {
         Request request = builder.setUrl(this.url + subUrl)
                 .addHeader("Accept", JSON)
                 .addHeader("Content-Type", JSON)
-                .addHeader("Authorization", "Bearer " + this.token)
+                .addHeader("api-key", this.token)
                 .build();
         return request;
     }
