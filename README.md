@@ -44,7 +44,7 @@ public class Main {
         // Now you can use the client to interact with Azure AI...
     }
 }
-
+```
 
 ## License
 
