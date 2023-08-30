@@ -43,7 +43,7 @@ public class Version {
 
     private final String buildNumber = "0.1.1";
     private final String buildName = "Don't Blame Me";
-    private final String author = "Matthew M. Gamble";
+    private final String author = "Int13 Consulting Inc.";
 
     /**
      * @return the buildNumber
