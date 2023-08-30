@@ -22,15 +22,19 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package ca.int13.azureai.api.classes;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  *
  * @author mgamble
  */
 public class AzureAIMessage {
     
+    private String name;
     private AzureAIRole role;
     private String content;
-
+    @SerializedName("function_call")
+    private AzureAIFunctionCall functionCall;
 
     public AzureAIMessage() {
         
@@ -66,6 +70,34 @@ public class AzureAIMessage {
      */
     public void setContent(String content) {
         this.content = content;
+    }
+
+    /**
+     * @return the functionCall
+     */
+    public AzureAIFunctionCall getFunctionCall() {
+        return functionCall;
+    }
+
+    /**
+     * @param functionCall the functionCall to set
+     */
+    public void setFunctionCall(AzureAIFunctionCall functionCall) {
+        this.functionCall = functionCall;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
     }
     
 }

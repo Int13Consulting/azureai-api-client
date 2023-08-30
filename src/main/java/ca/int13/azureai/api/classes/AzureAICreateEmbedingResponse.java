@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class AzureAICreateEmbedingResponse {
     private String object;
     private String model;
-    private AzureAICreateEmbedingResponseData data;
+    private ArrayList<AzureAICreateEmbedingResponseData> data;
 
     /**
      * @return the object
@@ -64,15 +64,23 @@ public class AzureAICreateEmbedingResponse {
     /**
      * @return the data
      */
-    public AzureAICreateEmbedingResponseData getData() {
+    public ArrayList<AzureAICreateEmbedingResponseData> getData() {
         return data;
     }
 
     /**
      * @param data the data to set
      */
-    public void setData(AzureAICreateEmbedingResponseData data) {
+    public void setData(ArrayList<AzureAICreateEmbedingResponseData> data) {
         this.data = data;
     }
+    
+    public void addData(AzureAICreateEmbedingResponseData data) {
+        if (this.data == null) {
+            this.data = new ArrayList<>();
+        }
+        this.data.add(data);
+    }
+    
     
 }

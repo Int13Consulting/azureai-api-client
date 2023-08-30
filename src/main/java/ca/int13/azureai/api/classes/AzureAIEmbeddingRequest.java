@@ -26,10 +26,18 @@ package ca.int13.azureai.api.classes;
  *
  * @author mgamble
  */
-public class AzureAIEmbedding {
+public class AzureAIEmbeddingRequest {
     private String input;
     private String user;
 
+    public AzureAIEmbeddingRequest() {
+        
+    }
+    
+    public AzureAIEmbeddingRequest(String input, String user) {
+        this.input = input;
+        this.user = user;
+    }
     /**
      * @return the input
      */

@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class AzureAICreateEmbedingResponseData {
     private String object;
     private int index;
-    private ArrayList<Long> embedding;
+    private ArrayList<Float> embedding;
 
     /**
      * @return the object
@@ -64,14 +64,14 @@ public class AzureAICreateEmbedingResponseData {
     /**
      * @return the embedding
      */
-    public ArrayList<Long> getEmbedding() {
+    public ArrayList<Float> getEmbedding() {
         return embedding;
     }
 
     /**
      * @param embedding the embedding to set
      */
-    public void setEmbedding(ArrayList<Long> embedding) {
+    public void setEmbedding(ArrayList<Float> embedding) {
         this.embedding = embedding;
     }
     

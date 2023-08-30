@@ -27,6 +27,11 @@ package ca.int13.azureai.api.client;
 public class Version {
 
     /*
+        0.1.1 - Fix bug in create embeding response
+        0.1.0 - Update client to support multiple deployments at run time so we can use gpt and ada at the same time with a single client
+        0.0.7 - Revert to java 11 for more compatibility
+        0.0.6 - More updates and bug fixes
+        0.0.5 - Add support for function calls in AzureAI
         0.0.4 - Set sane defaults on AIChatRequest
         0.0.3 - Fix issues with AzureAIMessage
         0.0.1 - Initial release for testing
@@ -36,7 +41,7 @@ public class Version {
 
     }
 
-    private final String buildNumber = "0.0.4";
+    private final String buildNumber = "0.1.1";
     private final String buildName = "Don't Blame Me";
     private final String author = "Matthew M. Gamble";
 

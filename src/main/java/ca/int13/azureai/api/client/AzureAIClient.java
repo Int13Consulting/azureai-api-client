@@ -28,7 +28,7 @@ import ca.int13.azureai.api.classes.AzureAIChatResponse;
 import ca.int13.azureai.api.classes.AzureAICompletionRequest;
 import ca.int13.azureai.api.classes.AzureAICompletionsResult;
 import ca.int13.azureai.api.classes.AzureAICreateEmbedingResponse;
-import ca.int13.azureai.api.classes.AzureAIEmbedding;
+import ca.int13.azureai.api.classes.AzureAIEmbeddingRequest;
 
 import com.google.gson.Gson;
 import java.io.Closeable;
@@ -49,7 +49,7 @@ public class AzureAIClient implements Closeable {
     private static final String JSON = "application/json; charset=UTF-8";
     private final boolean closeClient;
     private final AsyncHttpClient client;
-    private final String deploymentName;
+    
     private final String url;
     private final String token;
     private static final Version version = new Version();
@@ -57,12 +57,12 @@ public class AzureAIClient implements Closeable {
     private boolean closed = false;
     Gson gson = new Gson();
 
-    public AzureAIClient(String url, String apiKey, String deploymentName, String apiVersion) throws Exception {
+    public AzureAIClient(String url, String apiKey, String apiVersion) throws Exception {
         this.client = new DefaultAsyncHttpClient();
 
-        this.url = url + "/openai/deployments/" + deploymentName + "/";
+        this.url = url + "/openai/deployments/";
         this.token = apiKey;
-        this.deploymentName = deploymentName;
+        
         this.apiVersion = apiVersion;
         closeClient = true;
     }
@@ -93,9 +93,9 @@ public class AzureAIClient implements Closeable {
         return version.getBuildName();
     }
 
-    public AzureAICompletionsResult getCompletion(AzureAICompletionRequest completion) throws Exception {
+    public AzureAICompletionsResult getCompletion(AzureAICompletionRequest completion, String deploymentName) throws Exception {
         //chat/completions
-        Future<Response> f = client.executeRequest(buildRequest("POST", "completions?api-version=" + apiVersion, gson.toJson(completion)));
+        Future<Response> f = client.executeRequest(buildRequest("POST", "completions?api-version=" + apiVersion, gson.toJson(completion), deploymentName));
         Response r = f.get();
         if (r.getStatusCode() != 200) {
 
@@ -106,8 +106,8 @@ public class AzureAIClient implements Closeable {
         }
     }
 
-    public AzureAICreateEmbedingResponse createEmbedding(AzureAIEmbedding embedding) throws Exception {
-        Future<Response> f = client.executeRequest(buildRequest("POST", "embeddings?api-version=" + apiVersion, gson.toJson(embedding)));
+    public AzureAICreateEmbedingResponse createEmbedding(AzureAIEmbeddingRequest embedding, String deploymentName) throws Exception {
+        Future<Response> f = client.executeRequest(buildRequest("POST", "embeddings?api-version=" + apiVersion, gson.toJson(embedding), deploymentName));
         Response r = f.get();
         if (r.getStatusCode() != 200) {
 
@@ -118,8 +118,8 @@ public class AzureAIClient implements Closeable {
         }
     }
 
-    public AzureAIChatResponse sendChatRequest(AzureAIChatRequest chatRequest) throws Exception {
-        Future<Response> f = client.executeRequest(buildRequest("POST", "chat/completions?api-version=" + apiVersion, gson.toJson(chatRequest)));
+    public AzureAIChatResponse sendChatRequest(AzureAIChatRequest chatRequest, String deploymentName) throws Exception {
+        Future<Response> f = client.executeRequest(buildRequest("POST", "chat/completions?api-version=" + apiVersion, gson.toJson(chatRequest), deploymentName));
         Response r = f.get();
         if (r.getStatusCode() != 200) {
 
@@ -131,19 +131,19 @@ public class AzureAIClient implements Closeable {
         }
     }
 
-    private Request buildRequest(String type, String subUrl) {
+    private Request buildRequest(String type, String subUrl, String deploymentName) {
         RequestBuilder builder = new RequestBuilder(type);
-        Request request = builder.setUrl(this.url + subUrl)
+        Request request = builder.setUrl(this.url + deploymentName + "/" + subUrl)
                 .addHeader("Accept", JSON)
                 .addHeader("Content-Type", JSON)
-                .addHeader("api-key", this.token)
+                    .addHeader("api-key", this.token)
                 .build();
         return request;
     }
 
-    private Request buildRequest(String type, String subUrl, String requestBody) {
+    private Request buildRequest(String type, String subUrl, String requestBody, String deploymentName) {
         RequestBuilder builder = new RequestBuilder(type);
-        Request request = builder.setUrl(this.url + subUrl)
+        Request request = builder.setUrl(this.url  + deploymentName + "/" + subUrl)
                 .addHeader("Accept", JSON)
                 .addHeader("Content-Type", JSON)
                 .addHeader("api-key", this.token)

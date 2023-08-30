@@ -31,6 +31,7 @@ import java.util.ArrayList;
  */
 public class AzureAIChatRequest {
     private ArrayList<AzureAIMessage> messages;
+    private ArrayList<AzureAIFunction> functions;
     private Double temperature;
     @SerializedName("top_p")
     private Double topP;
@@ -51,7 +52,7 @@ public class AzureAIChatRequest {
         this.temperature = 0.7;
         this.maxTokens = 800;
         this.frequencyPenalty = 0;
-        this.presencePenalty = 0;
+        this.presencePenalty = 0;   
                 
     }
     /**
@@ -191,5 +192,26 @@ public class AzureAIChatRequest {
      */
     public void setUser(String user) {
         this.user = user;
+    }
+
+    /**
+     * @return the functions
+     */
+    public ArrayList<AzureAIFunction> getFunctions() {
+        return functions;
+    }
+
+    /**
+     * @param functions the functions to set
+     */
+    public void setFunctions(ArrayList<AzureAIFunction> functions) {
+        this.functions = functions;
+    }
+    
+    public void addFunction(AzureAIFunction function) {
+        if (this.functions == null) {
+            this.functions = new ArrayList<>();
+        }
+        this.functions.add(function);
     }
 }

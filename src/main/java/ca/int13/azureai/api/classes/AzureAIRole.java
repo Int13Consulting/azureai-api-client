@@ -36,6 +36,8 @@ public enum AzureAIRole {
     SYSTEM("system"), 
     @SerializedName("user")
     USER("user"), 
+    @SerializedName("function")
+    FUNCTION("function")
     
    ;
     
