@@ -122,8 +122,9 @@ public class AzureAIClient implements Closeable {
         Future<Response> f = client.executeRequest(buildRequest("POST", "chat/completions?api-version=" + apiVersion, gson.toJson(chatRequest), deploymentName));
         Response r = f.get();
         if (r.getStatusCode() != 200) {
-
-            throw new Exception("Could not create chat request - server resposne was " + r.getStatusCode() + " to url: " + url + "chat/completions?api-version=2023-03-15-preview");
+            System.out.println("Error running sendChatRequest.  Input was: " + gson.toJson(chatRequest) + " to deploymentName " + deploymentName);
+            System.out.println(r.getResponseBody());
+            throw new Exception("Could not create chat request - server resposne was " + r.getStatusCode() + " to url: " + r.getUri().toUrl());
         } else {
          //   System.out.println(gson.toJson(r.getResponseBody()));
             return gson.fromJson(r.getResponseBody(), AzureAIChatResponse.class);
