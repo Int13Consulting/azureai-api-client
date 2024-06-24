@@ -23,6 +23,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 package ca.int13.azureai.api.classes;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -34,6 +36,7 @@ public class AzureAIFunctionProperty {
     private String type;
     private String description;
     private List<String> enumValues; // Only for the 'format' field
+ private HashMap<String, AzureAIFunctionParameters> items;
 
     /**
      * @return the type
@@ -76,4 +79,18 @@ public class AzureAIFunctionProperty {
     public void setEnumValues(List<String> enumValues) {
         this.enumValues = enumValues;
     }
+        /**
+     * @return the items
+     */
+    public HashMap<String, AzureAIFunctionParameters> getItems() {
+        return items;
+    }
+
+    /**
+     * @param items the items to set
+     */
+    public void setItems(HashMap<String, AzureAIFunctionParameters> items) {
+        this.items = items;
+    }
+
 }

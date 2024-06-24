@@ -33,7 +33,7 @@ public class AzureAIFunctionParameters {
     private String type;
     private HashMap<String, AzureAIFunctionProperty> properties;
     private ArrayList<String> required;
-
+   
     
     public AzureAIFunctionParameters() {
         
@@ -98,4 +98,6 @@ public class AzureAIFunctionParameters {
         }
         this.required.add(required);
     }
+
+
 }
