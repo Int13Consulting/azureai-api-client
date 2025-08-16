@@ -27,6 +27,9 @@ package ca.int13.azureai.api.client;
 public class Version {
 
     /*
+        0.3.0 - Add support for assistants
+        0.2.0 - Start of websocket support to implement the Azure / OpenAI realtime API endpoints
+        0.1.4 - Updating pom.xml to resolve security issues in io.netty
         0.1.3 - Attempting to fix arrays as function params
         0.1.1 - Fix bug in create embeding response
         0.1.0 - Update client to support multiple deployments at run time so we can use gpt and ada at the same time with a single client
@@ -42,7 +45,7 @@ public class Version {
 
     }
 
-    private final String buildNumber = "0.1.3";
+    private final String buildNumber = "0.3.0";
     private final String buildName = "Don't Blame Me";
     private final String author = "Int13 Consulting Inc.";
 
